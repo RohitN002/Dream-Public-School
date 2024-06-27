@@ -1,0 +1,41 @@
+
+admin:
+userName :  raja@gmail.com
+password : Raja@123
+
+teacher :{
+    username : muthuselval@gmail.com
+    password : 84389648432
+}
+
+userValidation - code 
+pages - analatical e commerce - line no   84 - count: PropTypes.number,
+
+useSessionStorage.jsx
+
+
+  const user = sessionStorage.getItem("admin") ? "admin" : sessionStorage.getItem("staff_name")
+// <Box sx={{ flexShrink: 0, ml: 0.75 }}>
+    //   <ButtonBase
+    //     sx={{
+    //       p: 0.25,
+    //       bgcolor: open ? iconBackColorOpen : 'transparent',
+    //       borderRadius: 1,
+    //       '&:hover': { bgcolor: 'secondary.lighter' },
+    //       '&:focus-visible': { outline: `2px solid ${theme.palette.secondary.dark}`, outlineOffset: 2 }
+    //     }}
+    //     aria-label="open profile"
+    //     ref={anchorRef}
+    //     aria-controls={open ? 'profile-grow' : undefined}
+    //     aria-haspopup="true"
+    //     onClick={handleToggle}
+    //   >
+    //     <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 0.5 }}>
+    //       <Avatar alt="profile user" src={avatar1} size="sm" />
+    //       <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
+    //         {user}
+    //       </Typography>
+    //     </Stack>
+    //   </ButtonBase>
+     
+    // </Box>
