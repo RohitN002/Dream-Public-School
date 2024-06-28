@@ -19,11 +19,13 @@ export default function UniqueVisitorCard() {
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between" style={{backgroundColor:"#FFFFFF",padding:"20px"}}>
-        <Grid item>
-          <Typography variant="h5">Unique Visitor</Typography>
-        </Grid>
-        <Grid item>
+      {/* <Grid container alignItems="center" justifyContent="space-between" style={{backgroundColor:"#FFFFFF",padding:"20px"}}> */}
+        {/* <Grid item> */}
+          {/* <Typography variant="h5"> */}
+             Students Strength 
+             {/* </Typography> */}
+        {/* </Grid> */}
+        {/* <Grid item>
           <Stack direction="row" alignItems="center" spacing={0} style={{padding:""}}>
             <Button
               size="small"
@@ -42,8 +44,8 @@ export default function UniqueVisitorCard() {
               Week
             </Button>
           </Stack>
-        </Grid>
-      </Grid>
+        </Grid> */}
+      {/* </Grid> */}
       <MainCard content={false} sx={{ mt: 1.5,padding:"30px" }}>
         <Box sx={{ pt: 1, pr: 2 }}>
           <IncomeAreaChart slot={slot} />

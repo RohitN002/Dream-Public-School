@@ -38,13 +38,7 @@ import GroupIcon from '@mui/icons-material/Group';
         url: '/allStudents',
         icon: icons.SchoolIcon
       },
-      {
-        id: 'class-students',
-        title: 'class-Students',
-        type: 'item',
-        url: '/classstudents',
-        icon: icons.SchoolIcon
-      },
+    
       
       {
         id: 'staff-index',

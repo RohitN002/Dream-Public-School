@@ -248,28 +248,26 @@ const handleRevenueClick = ()=>{
   </div>
 </Grid>
       {/* row 2 */}
-      <Grid item xs={12} md={7} lg={8} >
+      <Grid item xs={12} md={12} lg={12} >
         <UniqueVisitorCard />
       </Grid>
-      <Grid item xs={12} md={5} lg={4}>
+      {/* <Grid item xs={12} md={12} lg={12}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Income Overview</Typography>
+            <Typography variant="h5">Staff Count</Typography>
           </Grid>
           <Grid item />
         </Grid>
         <MainCard sx={{ mt: 2 }} content={false}>
           <Box sx={{ p: 3, pb: 0 }}>
             <Stack spacing={2}>
-              <Typography variant="h6" color="text.secondary">
-                This Week Statistics
-              </Typography>
+              
              
             </Stack>
           </Box>
           <MonthlyBarChart />
         </MainCard>
-      </Grid>
+      </Grid> */}
 
       {/* bottom 1 */}
       <Grid item xs={12} sm={12} md={12} lg={12}>

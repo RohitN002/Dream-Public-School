@@ -1,82 +1,116 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import ReactApexChart from 'react-apexcharts';
-import config from '../../config';
+// src/TeacherPresenceChart.js
 
-// ==============================|| MONTHLY BAR CHART ||============================== //
+import React, { useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, PointElement, LinearScale, CategoryScale } from 'chart.js';
+  // Import the CSS file
 
-const MonthlyBarChart = () => {
-  const theme = useTheme();
-  const { secondary } = theme.palette.text;
-  const info = theme.palette.info.light;
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale
+);
 
-  const [series, setSeries] = useState([
-    {
-      data: [0, 0, 0, 0, 0, 0, 0]
-    }
-  ]);
+const TeacherPresenceChart = () => {
+  // Sample data
+  const [filter, setFilter] = useState('months'); // Default filter is 'months'
 
-  const [options, setOptions] = useState({
-    chart: {
-      type: 'bar',
-      height: 365,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: '45%',
-        borderRadius: 4
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    xaxis: {
-      categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      axisBorder: {
-        show: false
+  const data = {
+    labels: filter === 'dates' ?
+      ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] : // Labels for dates
+      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Labels for months
+    datasets: [
+      {
+        label: 'Teacher Count', // Updated label
+        data: filter === 'dates' ?
+          [8, 7, 8, 6, 7] : // Sample data for dates
+          [20, 25, 22, 27, 30, 28, 25, 24, 26, 23, 22, 21], // Sample data for months
+        fill: false,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        tension: 0.1,
       },
-      axisTicks: {
-        show: false
-      }
-    },
-    yaxis: {
-      show: false
-    },
-    grid: {
-      show: false
-    },
-    colors: [info],
-    xaxis: {
-      labels: {
-        style: {
-          colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary]
-        }
-      }
-    }
-  });
+    ],
+  };
 
-  useEffect(() => {
-    axios.get(`${config.apiURL}/dashboard/feesLogs/day`)
-      .then(response => {
-        // Process the API data to update the series state
-        const newData = response.data.map(item => parseFloat(item.total_paid_amount_current_week));
-        setSeries([{ data: newData }]);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []); // Only execute once on component mount
+  const handleChangeFilter = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 14,
+          },
+          color: '#333',
+        },
+      },
+      title: {
+        display: true,
+        text: `Teacher Count (${filter === 'dates' ? 'Daily' : 'Monthly'})`,
+        font: {
+          size: 20,
+        },
+        color: '#333',
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 12,
+        },
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: filter === 'dates' ? 'Date' : 'Month',
+          font: {
+            size: 16,
+          },
+          color: '#333',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Teacher Count', // Updated y-axis title
+          font: {
+            size: 16,
+          },
+          color: '#333',
+        },
+        beginAtZero: true,
+      },
+    },
+  };
 
   return (
-    <Box id="chart" sx={{ bgcolor: 'transparent' }}>
-      <ReactApexChart options={options} series={series} type="bar" height={365} />
-    </Box>
+    <div className="chart-container">
+      <div className="filter-container">
+        <label>
+          Filter by:
+          <select value={filter} onChange={handleChangeFilter}>
+            <option value="dates">Date</option>
+            <option value="months">Month</option>
+          </select>
+        </label>
+      </div>
+      <div className="line-chart-wrapper">
+        <Line data={data} options={options} />
+      </div>
+    </div>
   );
 };
 
-export default MonthlyBarChart;
+export default TeacherPresenceChart;
