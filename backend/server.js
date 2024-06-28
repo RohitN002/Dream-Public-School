@@ -4,9 +4,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
-const port = 8079;
 
+const dotenv = require('dotenv') 
+dotenv.config()
 const app = express();
+
+const port = process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,11 +31,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const db = mysql.createPool({
-    host: "127.0.0.1",
-    port: "3306",
-    user: "root",
-    password: "Rohit@mysql02",
-    database: "school"
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
+    user: process.env.DBUSER,
+    password: process.env.DBPWD,
+    database: process.env.DBDB
 });
 
 (async () => {
